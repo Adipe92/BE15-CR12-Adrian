@@ -1,0 +1,46 @@
+html, body {
+    margin: auto 0;
+    padding: 0;
+}
+.title {
+    font-family: 'Great Vibes', cursive;
+    text-shadow: 3px 3px 5px black;
+    font-size: 3em;
+}
+
+.header-img {
+    height: 600px;
+    background-image: url('../pictures/logo.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.header-text {
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    color: rgb(7, 0, 0);
+    text-align: center;
+}
+
+
+.main-title {
+    font-family: 'Great Vibes', cursive;
+    font-weight: bold;
+    font-size: 3em;
+}
+
+.bg-main {
+    background-color: rgb(255, 255, 255);
+}
+
+.wd {
+    width: 90%;
+}
+
+#map {
+    height: 80vh;
+}
