@@ -3,12 +3,12 @@ require_once 'actions/db_connect.php';
 
 if ($_GET['id']) {
     $id = $_GET['id'];
-    $sql = "SELECT * FROM products WHERE id = {$id}" ;
+    $sql = "SELECT * FROM places WHERE id = {$id}" ;
     $result = mysqli_query($connect, $sql);
     $data = mysqli_fetch_assoc($result);
     if (mysqli_num_rows($result) == 1) {
-        $title = $data['title'];
-        $isbn_number = $data['isbn_number'];
+        $locationName = $data['locationName'];
+        $price = $data['price'];
         $picture = $data['picture'];
     } else {
         header("location: error.php");
@@ -55,10 +55,10 @@ if ($_GET['id']) {
           <a class="nav-link text-white active" aria-current="page" href="index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white active" aria-current="page" href="#">Travels</a>
+          <a class="nav-link text-white active" aria-current="page" href="displayAll.php">Display All</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white active" aria-current="page" href="#">About us</a>
+          <a class="nav-link text-white active" aria-current="page" href="showAll.php">Show All</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-white active" aria-current="page" href="#">Contact</a>
@@ -81,7 +81,7 @@ if ($_GET['id']) {
                 </tr>
             </table>
 
-            <h3 class="mb-4 mt-5">Do you really want to delete this product?</h3>
+            <h3 class="mb-4 mt-5 mb-5">Do you really want to delete this place?</h3>
             <form action ="actions/a_delete.php" method="post">
                 <input type="hidden" name="id" value="<?php echo $id ?>"/> 
                 <input type="hidden" name="picture" value="<?php echo $picture ?>" />

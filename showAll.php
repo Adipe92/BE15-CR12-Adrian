@@ -1,25 +1,6 @@
-<?php
+<?php 
 require_once 'actions/db_connect.php';
 
-if ($_GET['id']) {
-    $id = $_GET['id'];
-    $sql = "SELECT * FROM places WHERE id = {$id}";
-    $result = mysqli_query($connect, $sql);
-    if (mysqli_num_rows($result) == 1) {
-        $data = mysqli_fetch_assoc($result);
-        $locationName = $data['locationName'];
-        $description = $data['description'];
-        $longitude = $data['longitude'];
-        $latitude = $data['latitude'];
-        $price = $data['price'];
-        $picture = $data['picture'];
-    } else {
-        header("location: error.php");
-    }
-    mysqli_close($connect);
-} else {
-    header("location: error.php");
-}
 ?>
 
 <!DOCTYPE html>
@@ -45,10 +26,7 @@ if ($_GET['id']) {
             }
             tr {
                 text-align: center;
-
             }
-            
-        
         </style>
     </head>
     <body>
@@ -81,68 +59,48 @@ if ($_GET['id']) {
     <div class="text-center">
         <img src="pictures/logo.png" alt="logo">
     </div>
-        
-            
-            <div class="container"> 
-            
-            <h4 class="text-center mt-3 mb-3">Welcome to our travel agency Mount Everest!</h4>
-            <p class="text-center">Find your way to travel!</p>
+    <div class="container">
+        <h4>To see all info click the button!</h4>
+        <button class="btn btn-success mt-3 mb-3" id="button">Display All</button>
+        <div id="places"></div>
+    </div>
+    </div>    
+    
+    <script>
+       document.getElementById("button").addEventListener("click", getplaces, false); 
 
-            <div class="container">
-            <hr class="m-4">
-            <div class="row">
-                <div class="col-lg-4 text-center">
-                <img class="mb-5" src="pictures/<?php echo $picture ?>" alt="pic">
-            </div>
-            <div class="col-lg-8">
-                <h3>Location</h3>
-                <p><?php echo $locationName ?></p>
-                <br>
-                <h4>Price: <?php echo $price ?> euro</h4>
-                <br>
-                <h4>Description: </h4>
-                <p><?php echo $description ?></p>
-                <br>
-            </div>
-            <h4>More about location</h4>
-         <div id="map"></div>
-        </div>
-        </div>
-        </div>
-        
+       function getplaces() {
+           const request = new XMLHttpRequest(); 
+           request.open("GET", "places.php", true); 
+           request.onload = function () {
+               if (this.status == 200) {
+                   let showPlaces = JSON.parse(this.responseText); 
+                   console.log(showPlaces) 
+                   let output = '';
+                   for (let i in showPlaces) {
+                       output += `
+                       <ul>
+                       <li>Location: ${showPlaces[i].locationName} </li>
+                       <li>Picture Id: ${showPlaces[i].picture} </li>
+                       <li>Price: ${showPlaces[i].price} </li>
+                       <li>Description: ${showPlaces[i].description} </li>
+                       <li>Longitude: ${showPlaces[i].longitude} </li>
+                       <li>Latitude: ${showPlaces[i].latitude} </li>
+                       </ul>
+                       `; 
+                   }
+                   document.getElementById('places').innerHTML = output; //
+               }
+           }
+           request.send(); 
+       }
+   </script>
+</body>
+</html>
 
             <div class="bg-black mt-5">
                 <p class="text-center p-5 text-white"><b>Copyright &copy; 2022 -Adrian Pedziwiatr</b></p>
             </div>
-
-<script>
-
-let geocoder;
-
-let markers = [];
-
-
-
-    function initMap() {
-        geocoder = new google.maps.Geocoder();
-        var mlocation = {
-        lat: <?php echo $latitude ?>,
-        lng: <?php echo $longitude ?>
-        };
-
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: mlocation,
-            zoom: 8
-        });
-        var pinpoint = new google.maps.Marker({
-        position: mlocation,
-        map: map
-    });
-
-    }
-
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtjaD-saUZQ47PbxigOg25cvuO6_SuX3M&callback=initMap" async defer></script>
+        
     </body>
 </html>

@@ -31,10 +31,10 @@
           <a class="nav-link text-white active" aria-current="page" href="index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white active" aria-current="page" href="#">Travels</a>
+          <a class="nav-link text-white active" aria-current="page" href="displayAll.php">Display All</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white active" aria-current="page" href="#">About us</a>
+          <a class="nav-link text-white active" aria-current="page" href="showAll.php">Show All</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-white active" aria-current="page" href="#">Contact</a>

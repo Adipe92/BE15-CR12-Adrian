@@ -19,7 +19,9 @@ if(mysqli_num_rows($result)  > 0) {
     <li class='list-group-item'>Price: " .$row['price']. "€</li>
   </ul>
   <div class='card-body'>
-  <a href='details.php?id=" .$row['id']."'><button class='btn btn-secondary btn-sm ms-4 mt-4 mb-4'type='button'>Details</button></a>
+  <a href='details.php?id=" .$row['id']."'><button class='btn btn-secondary btn-sm ms-3 mt-4 mb-4'type='button'>Details</button></a>
+  <a href='delete.php?id=" .$row['id']."'><button class='btn btn-danger btn-sm ms-4 mt-4 mb-4'type='button'>Delete</button></a>
+  <a href='update.php?id=" .$row['id']."'><button class='btn btn-success btn-sm ms-4 mt-4 mb-4'type='button'>Edit</button></a>
   </div>
 </div></div>";
     };
@@ -69,10 +71,10 @@ mysqli_close($connect);
           <a class="nav-link text-white active" aria-current="page" href="index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white active" aria-current="page" href="#">Travels</a>
+          <a class="nav-link text-white active" aria-current="page" href="displayAll.php">Display All</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white active" aria-current="page" href="#">About us</a>
+          <a class="nav-link text-white active" aria-current="page" href="showAll.php">Show All</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-white active" aria-current="page" href="#">Contact</a>
